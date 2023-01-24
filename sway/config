@@ -83,7 +83,8 @@ input type:touchpad {
 }
 
 input "type:keyboard" {
-	xkb_layout us
+	xkb_layout us,se
+	xkb_options grp:win_space_toggle
 }
 
 ### Key bindings
