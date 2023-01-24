@@ -85,6 +85,7 @@ input type:touchpad {
 input "type:keyboard" {
 	xkb_layout us,se
 	xkb_options grp:win_space_toggle
+	xkb_numlock enabled
 }
 
 ### Key bindings
