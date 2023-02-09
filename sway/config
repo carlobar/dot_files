@@ -21,18 +21,14 @@ set $term foot
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu wofi --show=drun --lines=5 --prompt=""
 
-
-### Define custom key bindings
-#
 set $window_manager thunar
-bindsym $mod+Shift+t exec $window_manager
-
 set $text_editor gedit --new-window
+
+bindsym $mod+Shift+t exec $window_manager
 bindsym $mod+Shift+g exec $text_editor
 
-set $web_browser /home/astaroth/Downloads/apps/firefox/firefox
+set $web_browser ~/Downloads/apps/firefox/firefox
 bindsym $mod+Shift+f exec $web_browser 
-
 
 ### Output configuration
 #
@@ -83,9 +79,7 @@ input type:touchpad {
 }
 
 input "type:keyboard" {
-	xkb_layout us,se
-	xkb_options grp:win_space_toggle
-	xkb_numlock enabled
+	xkb_layout us
 }
 
 ### Key bindings
@@ -246,7 +240,7 @@ bindsym $mod+r mode "resize"
 
 #exec swaymsg "exec  /usr/bin/mpd "
 #exec /usr/bin/mpd  --no-daemon --stdout --verbose
-exec mpdscribble
+#exec mpdscribble
 
 
 bar {
