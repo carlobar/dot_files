@@ -10,7 +10,7 @@ status:
 export: 
 	cp ./sway/config ~/.config/sway/config
 	cp -r ./waybar/* ~/.config/waybar/.
-	cp -r ./emacs.d/* ~/.emacs.d/.
+	cp -r ./emacs/* ~/.emacs.d/.
 
 import:
 	cp ~/.config/sway/config ./sway/.
