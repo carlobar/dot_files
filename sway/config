@@ -23,12 +23,15 @@ set $menu wofi --show=drun --lines=5 --prompt=""
 
 set $window_manager thunar
 set $text_editor gedit --new-window
+set $emacs emacs-gtk
 
 bindsym $mod+Shift+t exec $window_manager
 bindsym $mod+Shift+g exec $text_editor
+bindsym $mod+Shift+m exec $emacs
 
 set $web_browser ~/Downloads/apps/firefox/firefox
 bindsym $mod+Shift+f exec $web_browser 
+
 
 ### Output configuration
 #
