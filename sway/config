@@ -252,6 +252,9 @@ bar {
 }
 
 
+input * {
+        xkb_layout "se"
+}
 
 # 10 pixel border around windows
 #gaps inner 10
