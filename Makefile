@@ -8,8 +8,11 @@ status:
 
 
 export: 
+	mkdir -p ~/.config/sway
 	cp ./sway/config ~/.config/sway/config
+	mkdir -p ~/.config/waybar/
 	cp -r ./waybar/* ~/.config/waybar/.
+	mkdir -p ~/.emacs.d/
 	cp -r ./emacs/* ~/.emacs.d/.
 
 import:
