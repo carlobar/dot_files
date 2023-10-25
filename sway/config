@@ -82,7 +82,8 @@ input type:touchpad {
 }
 
 input "type:keyboard" {
-	xkb_layout us
+	xkb_layout "us,se"
+	xkb_options grp:shifts_toggle
 }
 
 ### Key bindings
@@ -251,11 +252,6 @@ bar {
     workspace_buttons yes
 }
 
-
-input * {
-        xkb_layout "se"
-}
-
 # 10 pixel border around windows
 #gaps inner 10
 
@@ -265,7 +261,5 @@ default_floating_border pixel
 
 font pango: Cantarell 14px
 #font pango: Inconsolata 12
-
-
 
 include /etc/sway/config.d/*
