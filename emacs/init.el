@@ -35,6 +35,7 @@
 (setq default-directory "~/Sync/org/")
 
 ;; Define the directory and files used
+;; The following search for events or meetings defined in any file
 (setq org-directory "~/Sync/org/")
 ;;(setq org-agenda-files (list "~/Sync/org/inbox.org" "~/Sync/org/agenda.org"))
 (setq org-agenda-files 
@@ -49,16 +50,16 @@
 ;; Define the capture template
 (setq org-capture-templates
       '(
-	("t" "ToDo" entry (file+headline "~/Sync/org/gtd.org" "Tasks")
+	("t" "ToDo" entry (file+headline "~/Sync/org/inbox.org")
 	 "* TODO %?\n %i\n %a")
-	("j" "Journal" entry (file+datetree "~/Sync/org/journal.org")
-	 "* %?\n  Entered on %U\n %i\n %a")
+	;;("j" "Journal" entry (file+datetree "~/Sync/org/journal.org")
+	;; "* %?\n  Entered on %U\n %i\n %a")
 	("i" "Inbox" entry (file "~/Sync/org/inbox.org")
 	 "* TODO %?\n  Entered on %U\n %i\n %a")
 	("m" "Meeting" entry (file+headline "~/Sync/org/agenda.org" "Future")
 	 "* %? :meeting:\n <%<%Y-%m-%d %a %H:00>>" )
-	("n" "Note" entry (file "~/Sync/org/notes.org")
-	 "* Note (%a)\n  Entered on %U\n %?")
+	;;("n" "Note" entry (file "~/Sync/org/notes.org")
+	;; "* Note (%a)\n  Entered on %U\n %?")
 	)
 )
 
