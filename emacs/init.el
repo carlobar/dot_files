@@ -1,6 +1,6 @@
 ;; Do not show startup screen
 (setq inhibit-startup-message t
-      visible-bell t ) 
+      visible-bell t )
       
 ;; Basic configuration
 (menu-bar-mode -1)
@@ -50,12 +50,12 @@
 ;; Define the capture template
 (setq org-capture-templates
       '(
-	("t" "ToDo" entry (file+headline "~/Sync/org/inbox.org")
-	 "* TODO %?\n %i\n %a")
+	;;("t" "ToDo" entry (file "~/Sync/org/inbox.org")
+	;; "* TODO %?\n %i\n %a")
 	;;("j" "Journal" entry (file+datetree "~/Sync/org/journal.org")
 	;; "* %?\n  Entered on %U\n %i\n %a")
 	("i" "Inbox" entry (file "~/Sync/org/inbox.org")
-	 "* TODO %?\n  Entered on %U\n %i\n %a")
+	 "* TODO %?\n:PROPERTIES:\n:CREATED:  %U %i %a\n:END:")
 	("m" "Meeting" entry (file+headline "~/Sync/org/agenda.org" "Future")
 	 "* %? :meeting:\n <%<%Y-%m-%d %a %H:00>>" )
 	;;("n" "Note" entry (file "~/Sync/org/notes.org")
@@ -67,14 +67,24 @@
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)"  "IN-PROGRESS" "WAITING(w)" "DONE(d)")))
 
+;; record the ate when the TODO was created
+(defun log-todo-creation-date (&rest ignore)
+  "Log TODO creation time in the property drawer under the key 'Created'"
+  (when (and (string= (org-get-todo-state) "TODO")
+             (not (org-entry-get nil "CREATED")))
+    (org-entry-put nil "CREATED" (format-time-string "[%Y-%m-%d %a %H:%M]"))))
+
+(add-hook 'org-after-todo-state-change-hook #'log-todo-creation-date)
+
 ;; Record date when a task was 'activated'
 (defun log-todo-next-creation-date (&rest ignore)
   "Log NEXT creation time in the property drawer under the key 'Activated'"
   (when (and (string= (org-get-todo-state) "NEXT")
 	     (not (org-entry-get nil "ACTIVATED")))
-    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d %a %H:%M]"))))
 (add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
 
+;; Record the time when the TODO was marked 'done'
 (setq org-log-done 'time)
 
 
@@ -112,7 +122,7 @@
 ;; Configure the refiling
 ;;(regexp-opt '("Tasks" "Notes"))
 
-;; Save the corresponding buffers
+;; Save the corresponding buffers without need of user confirmation
 (defun gtd-save-org-buffers ()
   "Save `org-agenda-files' buffers without user confirmation.
 See also `org-save-all-org-buffers'"
@@ -128,8 +138,9 @@ See also `org-save-all-org-buffers'"
 (setq org-outline-path-complete-in-steps t)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
+;; move content to projects.org, in the subsections Note or task
 (setq org-refile-targets
-      '(("~/Sync/org/projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)"))
+      '(("~/Sync/org/projects.org" :regexp . "\\(?:Notes\\|Tasks\\)"))
 )
 ;;      '(("~/Sync/org/projects.org" :maxlevel . 4)))
 
